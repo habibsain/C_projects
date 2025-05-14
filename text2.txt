@@ -1,0 +1,4 @@
+The sum is: 165
+Time consumed: 0.000029
+The sum is: 165
+Time consumed: 0.000029
