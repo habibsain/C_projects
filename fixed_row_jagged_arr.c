@@ -2,13 +2,15 @@
 #include<stdlib.h>
 int main()
 {
-	int* arr;
-	arr =  malloc(4 * sizeof(int));
+	int* arr[3];
+
+	//arr =  malloc(4 * sizeof(int));
 	for(int i = 0; i < 4; i++){
-	printf("the address of a[%d] is %p\n", i, &arr[i]);
+	printf("the address of a[%d] is %p\n", i, arr[i]);
 	}
 
-	free(arr);
+	
+	//free(arr);
 
 	return 0;
 }
