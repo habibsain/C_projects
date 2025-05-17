@@ -1,19 +1,33 @@
-#include"newp.h"
+#include"dyn_arr.h"
 #include<stdio.h>
 #include<stdlib.h>
 
 
 int main()
 {
-	int arr[] = { 1, 2, 3, 4, 5};
+	int arr[] = { 5, 4, 3, 2, 1};
 
-	int x;
+	darray* new_arr;
+	
+	new_arr = init_darray(sizeof(int) * 5);
 
-	x = sum_arr(arr, 5);
+	for(int i = 0; i < 5; i++)
+	{
+		append_darray(new_arr, arr[i]);
+		int *val = (int *)new_arr->data + sizeof(int) * i;
+		printf("The element darr[%d] is: %d\n", i, *val);
+	}
+	printf("Hello\n");
+	free_array(new_arr);
 
-	printf("The sum is %d\n", x);
-	printf("The elements of the array are following:\n");
-	print_arr(arr, 5);
+
+	// int x;
+
+	// x = sum_arr(arr, 5);
+
+	// printf("The sum is %d\n", x);
+	// printf("The elements of the array are following:\n");
+	// print_arr(arr, 5);
 
 	return 0;
 }

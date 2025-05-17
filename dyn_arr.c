@@ -5,35 +5,40 @@
 
 darray *init_darray(size_t size)
 {
-    darray arr;
-    arr.data = malloc(size);
-    if(arr.data == NULL)
+    darray *arr;
+    arr = malloc(sizeof(darray));
+    if(arr == NULL)
     {
-        print("Memory allocation error");
+        printf("Memory allocation failed");
+        exit(EXIT_FAILURE);
+    }
+    arr->data = malloc(size);
+    if(arr->data == NULL)
+    {
+        printf("Memory allocation error");
         exit(EXIT_FAILURE);
     }
     else
     {
-        arr.current_num = 0;
+        arr->current_num = 0;
     }
-    arr.max_num = size;
+    arr->max_num = size;
 
-    return &arr;
+    return arr;
 }
 
-int resize_darray(darray *arr, size_t new_size)
+void resize_darray(darray *arr, size_t new_size)
 {
     //darray array = *arr;
     arr->data = realloc( arr->data, new_size);
     if(arr->data == NULL)
     {
-        print("Memory reallocation error");
-        return 0;
+        printf("Memory reallocation error");
+        exit(EXIT_FAILURE);
     }
     else
     {
         arr->max_num = new_size;
-        return 1;
     }
     
 }
@@ -45,16 +50,16 @@ void append_darray(darray *arr, int element)
         int x;
         do
         {
-            x = resize_darray(arr, arr->max_num + sizeof(int) * MAX_SIZE);
-            printf("Memory reallocated!");
+            resize_darray(arr, arr->max_num + sizeof(int) * MAX_SIZE);
+            printf("Memory reallocated!\n");
         } while (x !=1);
     }
-    else
-    {
-        *((int *)arr->data + arr->current_num) = element;
-        arr->current_num += sizeof(int);
+    
+    
+    *((int *)arr->data + arr->current_num) = element;
+    arr->current_num += sizeof(int);
         
-    }
+    
     
 
 }
@@ -62,4 +67,7 @@ void append_darray(darray *arr, int element)
 void free_array(darray *arr)
 {
     free(arr->data);
+    arr->data = NULL;
+    free(arr);
+    arr = NULL;
 }

@@ -16,10 +16,10 @@ typedef struct {
 darray *init_darray(size_t size);
 
 //resize the dynamic array
-int resize_darray(darray *arr, size_t new_size);
+void resize_darray(darray *arr, size_t new_size);
 
 //add element to the array
-int append_darray(darray *arr, int element);
+void append_darray(darray *arr, int element);
 
 void free_array(darray *arr);
 
