@@ -9,7 +9,7 @@ int main()
 
 	darray* new_arr;
 	
-	new_arr = init_darray(sizeof(int) * 5);
+	new_arr = init_darray(5);
 
 	for(int i = 0; i < 5; i++)
 	{

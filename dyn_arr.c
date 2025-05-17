@@ -12,7 +12,7 @@ darray *init_darray(size_t size)
         printf("Memory allocation failed");
         exit(EXIT_FAILURE);
     }
-    arr->data = malloc(size);
+    arr->data = malloc(size * sizeof(int));
     if(arr->data == NULL)
     {
         printf("Memory allocation error");
