@@ -5,13 +5,13 @@
 
 int main()
 {
-	int arr[] = { 5, 4, 3, 2, 1};
+	int arr[] = { 5, 4, 3, 2, 1, 6};
 
 	darray* new_arr;
 	
 	new_arr = init_darray(5);
 
-	for(int i = 0; i < 5; i++)
+	for(int i = 0; i < 6; i++)
 	{
 		append_darray(new_arr, arr[i]);
 		int val = new_arr->data [i];
