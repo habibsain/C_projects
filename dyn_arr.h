@@ -7,7 +7,7 @@
 #define MAX_SIZE 50
 
 typedef struct {
-	void *data;
+	int *data;
 	size_t current_num; // current number of elements in darray
 	size_t max_num; // max nuber of elements in darray
 } darray;

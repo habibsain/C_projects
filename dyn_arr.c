@@ -1,4 +1,4 @@
-#include "dyn_arr.h"
+#include"dyn_arr.h"
 #include<stdio.h>
 #include<stdlib.h>
 
@@ -18,10 +18,7 @@ darray *init_darray(size_t size)
         printf("Memory allocation error");
         exit(EXIT_FAILURE);
     }
-    else
-    {
-        arr->current_num = 0;
-    }
+    arr->current_num = 0;
     arr->max_num = size;
 
     return arr;
@@ -30,16 +27,14 @@ darray *init_darray(size_t size)
 void resize_darray(darray *arr, size_t new_size)
 {
     //darray array = *arr;
-    arr->data = realloc( arr->data, new_size);
+    arr->data = realloc( arr->data, new_size * sizeof(int));
     if(arr->data == NULL)
     {
         printf("Memory reallocation error");
         exit(EXIT_FAILURE);
     }
-    else
-    {
-        arr->max_num = new_size;
-    }
+    
+    arr->max_num = new_size;
     
 }
 
@@ -47,17 +42,17 @@ void append_darray(darray *arr, int element)
 {
     if(arr->current_num >= arr->max_num - 2)
     {
-        int x;
-        do
+        resize_darray(arr, arr->max_num + MAX_SIZE);
+        if(arr->data == NULL)
         {
-            resize_darray(arr, arr->max_num + sizeof(int) * MAX_SIZE);
-            printf("Memory reallocated!\n");
-        } while (x !=1);
+            printf("Array resizing failed");
+            exit(EXIT_FAILURE);
+        }
     }
     
     
-    *((int *)arr->data + arr->current_num) = element;
-    arr->current_num += sizeof(int);
+    arr->data [arr->current_num] = element;
+    arr->current_num ++;
         
     
     

@@ -14,7 +14,7 @@ int main()
 	for(int i = 0; i < 5; i++)
 	{
 		append_darray(new_arr, arr[i]);
-		int *val = (int *)new_arr->data + sizeof(int) * i;
+		int *val = new_arr->data [i];
 		printf("The element darr[%d] is: %d\n", i, *val);
 	}
 	printf("Hello\n");
