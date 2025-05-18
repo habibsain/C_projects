@@ -14,8 +14,8 @@ int main()
 	for(int i = 0; i < 5; i++)
 	{
 		append_darray(new_arr, arr[i]);
-		int *val = new_arr->data [i];
-		printf("The element darr[%d] is: %d\n", i, *val);
+		int val = new_arr->data [i];
+		printf("The element darr[%d] is: %d\n", i, val);
 	}
 	printf("Hello\n");
 	free_array(new_arr);
