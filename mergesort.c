@@ -8,7 +8,7 @@ void arr_cpy(int *arr_from, int num_element, int *arr_to){
     }
 }
 
-void merge(int* a, int l, int m, int r)
+int *merge(int* a, int l, int m, int r)
 {
     int num_l = l;
     int num_r = m + 1;
@@ -42,19 +42,29 @@ void merge(int* a, int l, int m, int r)
         i++;
         num_r++;
     }
+    return temp;
 
 }
 
-void mergesort(int * arr, int num)
+void mergesort(int * arr, int l, int m, int r)
 {
-    int l = 0;
-    int r = num - 1;
-    int m = r / 2;//gives the floor value after division
+    int mid_l = m / 2;
+    int mid_r = m + l + 1;
 
-    int arr_l[m + 1];
-    int arr_r[r - m];
+    mergesort(arr, l, mid_l, m);
+    mergesort(arr, m + 1, mid_r, r);
 
-    arr_cpy(arr, m + 1, arr)
+    merge(arr, l, m, r);
 
     
+}
+
+int main()
+{
+    int num = 7;
+    int array[7] = {6, 4, 2, 0, 3, 5, 1};
+    int l = 0;
+    int m = num / 2;
+    int r = num - 1;
+
 }
