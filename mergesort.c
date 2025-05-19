@@ -42,21 +42,25 @@ int *merge(int* a, int l, int m, int r)
         i++;
         num_r++;
     }
-    return temp;
-
+    //array copy back
+    for(int i = 0; i <= r - l; i++)
+    {
+	    a[l + i] = temp[i];
+    }
 }
 
-void mergesort(int * arr, int l, int m, int r)
+void mergesort(int * arr, int l, int r)
 {
-    int mid_l = m / 2;
-    int mid_r = m + l + 1;
-
-    mergesort(arr, l, mid_l, m);
-    mergesort(arr, m + 1, mid_r, r);
-
-    merge(arr, l, m, r);
-
+    if(l < r)
+    {
+	int mid = l + (r - l)/2 ;
     
+    	mergesort(arr, l,  mid);
+    	mergesort(arr, mid + 1, r);
+
+    	merge(arr, l, mid, r);
+
+    }
 }
 
 int main()
@@ -64,7 +68,10 @@ int main()
     int num = 7;
     int array[7] = {6, 4, 2, 0, 3, 5, 1};
     int l = 0;
-    int m = num / 2;
     int r = num - 1;
-
+    mergesort(array, l, r);
+    for(int i = 0; i < 7; i++)
+    {
+	    printf("%d\n", array[i]);
+    }
 }
