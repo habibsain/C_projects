@@ -49,5 +49,12 @@ void mergesort(int * arr, int num)
 {
     int l = 0;
     int r = num - 1;
-    int m = 
+    int m = r / 2;//gives the floor value after division
+
+    int arr_l[m + 1];
+    int arr_r[r - m];
+
+    arr_cpy(arr, m + 1, arr)
+
+    
 }
