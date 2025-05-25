@@ -5,7 +5,8 @@
 
 int main()
 {
-	float x = (float)3 / 2;
-	printf("%f\n", x);
+	float x[2] = {1, 2};
+	printf("%p\n", x);
+	printf("%p\n", x+1);
 	return 0;
 }

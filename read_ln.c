@@ -63,7 +63,7 @@ char * shl_read_line(void){
 }
 
 
-int main(int arc, char *argv){
+int main(int argc, char *argv){
     //loop command
     //shl_loop;
     //return EXIT_SUCCESS;
