@@ -8,9 +8,21 @@ void main()
 	int val = fork();
 	if(val == 0)
 	{
-		printf("This is the child process: %d\n", ++x);
+		const char *argv[3];
+		argv[0] = "ls";
+		argv[1] = "-al";
+		argv[2] = NULL;
+		execvp(argv[0], argv);
+		
+	}
+	else if(val < 0)
+	{
+		perror("fork");
+		exit(2);
 	}
 	else
-		printf("Parent : %d\n", --x);
+		waitpid(val, NULL);
+
+
 }
 
