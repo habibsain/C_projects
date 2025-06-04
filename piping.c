@@ -21,6 +21,22 @@ void main(int argc, char **argv)
 	//redirect stdout for first process
 	dup2(fdpipe[1], 1);
 	close(fdpipe[1]);
+	
+	int ret = fork();
+	if(ret == 0)
+	{
+		close(fdpipe[0];
+		//implement the ls command
+		argv[0] = "ls";
+		argv[1] = "-al";
+		argv[2] = NULL;
+
+		//execute
+		execvp(argv[0], argv);
+
+		//error handling
+		
+	}
 
 	
 }
