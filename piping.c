@@ -42,6 +42,14 @@ void main(int argc, char **argv)
 	dup2(fdpipe[0], 0);
 	close(fdpipe[0]);
 
+	//create an outputfile to store the result
+	int fd = open(argv[2], O_WRONLY|O_CREAT|O_TRUNC, 0600);
+	if(fd < 0)
+	{
+		perror("Open");
+		exit(1);
+	}
+
 	//redirect output and input to original
 	dup2(temp_int, 0);
 	dup2(temp_out, 1);	
