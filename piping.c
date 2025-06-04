@@ -27,17 +27,23 @@ void main(int argc, char **argv)
 	{
 		close(fdpipe[0];
 		//implement the ls command
-		argv[0] = "ls";
-		argv[1] = "-al";
-		argv[2] = NULL;
+		char *args[3];
+		args[0] = "ls";
+		args[1] = "-al";
+		args[2] = NULL;
 
 		//execute
-		execvp(argv[0], argv);
+		execvp(args[0], args);
 
 		//error handling
 		
 	}
+	//redirect output for grep
+	dup2(fdpipe[0], 0);
+	close(fdpipe[0]);
 
-	
+	//redirect output and input to original
+	dup2(temp_int, 0);
+	dup2(temp_out, 1);	
 }
 
