@@ -25,7 +25,7 @@ void main(int argc, char **argv)
 	int ret = fork();
 	if(ret == 0)
 	{
-		close(fdpipe[0];
+		close(fdpipe[0]);
 		//implement the ls command
 		char *args[3];
 		args[0] = "ls";
@@ -34,11 +34,12 @@ void main(int argc, char **argv)
 
 		//execute
 		execvp(args[0], args);
-
-		//error handling
 		
+		//error handling
+		perror("execvp");
+		_exit(1);
 	}
-	//redirect output for grep
+	//redirect input for grep
 	dup2(fdpipe[0], 0);
 	close(fdpipe[0]);
 
@@ -49,9 +50,33 @@ void main(int argc, char **argv)
 		perror("Open");
 		exit(1);
 	}
+	//redirect stdout to outfile
+	dup2(fd, 1);
+	close(fd);
+
+
+	//implement grep over the output from prev child process
+	
+	ret = fork();
+	if(ret == 0)
+	{
+		char *args[3];
+		args[0] = "grep";
+		args[1] = argv[1];
+		args[2] = NULL;
+
+		execvp(args[0], args);
+
+		perror("execvp");
+		_exit(1);//diff betn exit and _exit
+	}
+
 
 	//redirect output and input to original
-	dup2(temp_int, 0);
+	dup2(temp_in, 0);
 	dup2(temp_out, 1);	
+
+	waitpid(ret, NULL);
+	printf("Completed");
 }
 
