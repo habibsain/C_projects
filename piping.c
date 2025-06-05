@@ -21,11 +21,14 @@ void main(int argc, char **argv)
 	//redirect stdout for first process
 	dup2(fdpipe[1], 1);
 	close(fdpipe[1]);
+
+	dup2(fdpipe[0], 0);
+        close(fdpipe[0]);
 	
 	int ret = fork();
 	if(ret == 0)
 	{
-		close(fdpipe[0]);
+		//close(fdpipe[0]);
 		//implement the ls command
 		char *args[3];
 		args[0] = "ls";
@@ -40,8 +43,8 @@ void main(int argc, char **argv)
 		_exit(1);
 	}
 	//redirect input for grep
-	dup2(fdpipe[0], 0);
-	close(fdpipe[0]);
+	//dup2(fdpipe[0], 0);
+	//close(fdpipe[0]);
 
 	//create an outputfile to store the result
 	int fd = open(argv[2], O_WRONLY|O_CREAT|O_TRUNC, 0600);
