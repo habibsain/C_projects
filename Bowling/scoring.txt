@@ -1,0 +1,30 @@
+###----SCORING---####
+
+________________________________________      ______________
+/Player name/_____1______/______2______/. . ./_____10______/
+/           /    /___/___/     /___/___/     /    /___/____/
+/___________/___________/______________/     /_____________/
+
+
+
+For each player the scoring is added per frame based on the following rules
+
+1. Each frame has two tries
+2. If all 10 pins don't fall in both tries combined,
+    The score is the total pins fallen added to previous score.
+
+3. If all pins fall in 2nd try(A spare), we add 10 + pins fallen in next try, to the previous score.
+4. If all pins fall in 1st try(A strike), we add 10 + pins fallen in next two tries, to the previous score.
+
+Example:
+
+________________________________________      ______________
+/Player name/_____1______/______2______/. . ./_____10______/
+/ Pl-1      /    /_1_/_4_/     /_4_/_5_/     /    /___/____/
+/___________/_____5_____/_______14______/     /_____________/
+
+In the second frame: score = 14 (fallen: 9 + prev: 5)
+
+If the next 3 tries knock 6, 4, 5 pins. we get a spare(6 + 4 = 10) in the next frame
+
+So in 3rd frame: score = 29 (fallen: 10 + prev: 14 + next_try: 5)
