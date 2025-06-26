@@ -30,7 +30,7 @@ int main(){
 
 
     printf("The data in the node1 is:%d\n", node1->data);
-    printf("The data in the node2 is:%d\n", node2->data);
+    printf("The data in the node2 is:%d\n", node1->next->data);
 
     return 0;
 }
