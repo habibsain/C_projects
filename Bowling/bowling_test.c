@@ -5,21 +5,32 @@
 
 int main(){
 
-    typedef
-    struct{
+    typedef struct Node{
         int data;
         struct Node* next;
     } Node;
 
-   Node* node;
-   node = (Node*)NEW(sizeof(Node));
+    Node* node1;
+    node1  = (Node*)NEW(sizeof(Node));
 
 
-   node ->data = 0;
-   node ->next = NULL;
+    node1 ->data = 0;
+    node1 ->next = NULL;
+
+    //Link another node to it
+    Node* node2;
+
+    //Allocate memory
+    node2 = (Node*)NEW(sizeof(Node));
+   
+    //Assign new data
+    node1 ->next = node2;
+    node2 ->data = 1;
+    node2 ->next = NULL;
 
 
-   printf("The data in the node is:%d\n", node->data);
+    printf("The data in the node1 is:%d\n", node1->data);
+    printf("The data in the node2 is:%d\n", node2->data);
 
     return 0;
 }
