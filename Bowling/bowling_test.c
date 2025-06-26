@@ -32,5 +32,8 @@ int main(){
     printf("The data in the node1 is:%d\n", node1->data);
     printf("The data in the node2 is:%d\n", node1->next->data);
 
+    FREE(node1);
+    FREE(node2);
+
     return 0;
 }
