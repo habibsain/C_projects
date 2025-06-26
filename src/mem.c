@@ -14,7 +14,7 @@ void* NEW(size_t size)
     return ptr;
 }
 
-void FREE(void* ptr)
+void* FREE(void* ptr)
 {
     if(ptr != NULL)
     {
