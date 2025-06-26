@@ -8,7 +8,7 @@ void* NEW(size_t size)
 
     if(ptr == NULL)
     {
-        frintf(stderr,"Memory allocation error");
+        fprintf(stderr,"Memory allocation error");
         exit(EXIT_FAILURE);
     }
     return ptr;
