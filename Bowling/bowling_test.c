@@ -3,24 +3,25 @@
 
 
 int main(){
+    //typedef struct node Node;
 
-    typedef struct Node{
+    struct Node{
         int data;
         struct Node* next;
-    } Node;
+    }*node1, *node2;
 
-    Node* node1;
-    node1  = (Node*)NEW(sizeof(Node));
+    //Node* node1;
+    node1  = (struct Node*)NEW(sizeof(struct Node));
 
 
     node1 ->data = 0;
     node1 ->next = NULL;
 
     //Link another node to it
-    Node* node2;
+    //Node* node2;
 
     //Allocate memory
-    node2 = (Node*)NEW(sizeof(Node));
+    node2 = (struct Node*)NEW(sizeof(struct Node));
    
     //Assign new data
     node1 ->next = node2;
