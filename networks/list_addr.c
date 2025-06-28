@@ -9,6 +9,8 @@
 // #pragma comment(lib, "ws2_32.lib")
 
 // #else//Linux
+#define _GNU_SOURCE
+
 #include<sys/types.h>
 #include<sys/socket.h>
 #include<netdb.h>
@@ -52,8 +54,8 @@ int main()
         const int family_size = family == AF_INET ? \
             sizeof(struct sockaddr_in) : sizeof(struct sockaddr_in6);
         
-        //getnameinfo(address->ifa_addr, family_size ,ap, sizeof(ap), 0, 0, NI_NUMERICHOST);
-        //printf("\t%s\n", ap);
+        getnameinfo(address->ifa_addr, family_size ,ap, sizeof(ap), 0, 0, NI_NUMERICHOST);
+        printf("\t%s\n", ap);
         }
         
     address->ifa_next;

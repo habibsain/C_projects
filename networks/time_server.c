@@ -9,6 +9,7 @@
 #pragma comment(lib, "ws2_32.lib")
 
 #else//Linux
+#define _GNU_SOURCE
 #include<sys/types.h>
 #include<sys/socket.h>
 #include<netdb.h>
@@ -16,6 +17,7 @@
 #include<arpa/inet.h>
 #include<unistd.h>
 #include<errno.h>
+#include<ifaddrs.h>
 #endif
 
 #include<stdlib.h>
@@ -50,12 +52,15 @@ int main()
     #endif
 
 //console
-    time_t timer;
-    time(&timer);
+    // time_t timer;
+    // time(&timer);
 
-    printf("Current time: %s\n", ctime(&timer));
+    // printf("Current time: %s\n", ctime(&timer));
 
 //networked
+    struct addrinfo hints = {
+    
+    };
 
 
     return 0;
