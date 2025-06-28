@@ -1,14 +1,14 @@
-#if defined(_WIN32)//windows
+// #if defined(_WIN32)//windows
 
-#ifndef _WIN32_WINNT
-#define _WIN32_WINNT 0x0600
-#endif
+// #ifndef _WIN32_WINNT
+// #define _WIN32_WINNT 0x0600
+// #endif
 
-#include<winsock2.h>
-#include<ws2tcpip.h>
-#pragma comment(lib, "ws2_32.lib")
+// #include<winsock2.h>
+// #include<ws2tcpip.h>
+// #pragma comment(lib, "ws2_32.lib")
 
-#else//Linux
+// #else//Linux
 #include<sys/types.h>
 #include<sys/socket.h>
 #include<netdb.h>
@@ -18,16 +18,16 @@
 #include<netinet/in.h>
 #include<string.h>
 #include<arpa/inet.h>
-#endif
+// #endif
 
 #include<stdio.h>
 #include<stdlib.h>
 
 int main()
 {
-    #if defined(_WIN32)//Windows
+    // #if defined(_WIN32)//Windows
 
-    #else//Linux
+    // #else//Linux
     struct ifaddrs* addresses;
     
     if(getifaddrs(&addresses) == -1)
@@ -62,5 +62,5 @@ int main()
     freeifaddrs(addresses);
     return 0;
 
-    #endif
+    // #endif
 }
