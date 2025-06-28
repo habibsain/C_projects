@@ -1,29 +1,82 @@
-// #if defined(_WIN32)//windows
+#if defined(_WIN32)//windows
 
-// #ifndef _WIN32_WINNT
-// #define _WIN32_WINNT 0x0600
-// #endif
+#ifndef _WIN32_WINNT
+#define _WIN32_WINNT 0x0600
+#endif
 
-// #include<winsock2.h>
-// #include<ws2tcpip.h>
-// #pragma comment(lib, "ws2_32.lib")
+#include<winsock2.h>
+#include<iphlpapi.h>
+#include<ws2tcpip.h>
+#pragma comment(lib, "ws2_32.lib")
+#pragma comment(lib, "iphlpapi.lib")
 
-// #else//Linux
+
+#else//Linux
 #define _GNU_SOURCE
 
 #include<sys/socket.h>
 #include<netdb.h>
 #include<ifaddrs.h>
-// #endif
+#endif
 
 #include<stdio.h>
 #include<stdlib.h>
 
 int main()
 {
-    // #if defined(_WIN32)//Windows
 
-    // #else//Linux
+//Windows
+
+    #if defined(_WIN32)
+
+    //Initialise the winsock
+    WSADATA d;
+    if(WSAStartup(MAKEWORD(2, 2), &d)){
+        fprintf(stderr, "Winsock Initialization unsuccessful");
+        return -1;
+    }
+
+    //request adapter's addresses
+    DWORD asize = 20000;
+    PIP_ADAPTER_ADDRESSES adapters;
+
+    do
+    {
+        adapters = (PIP_ADAPTER_ADDRESSES)malloc(asize);
+
+        if(!adapters)
+        {
+            fprintf(stderr, "%ld byte memory couldn't be allocated.\n", asize);
+            WSACleanup();
+            return -1;
+        }
+
+        int r = GetAdaptersAddresses(AF_UNSPEC, GAA_FLAG_INCLUDE_PREFIX, 0, adapters, &asize);
+        
+        if(r == ERROR_BUFFER_OVERFLOW)
+        {
+            fprintf(stderr, "GetAdaptersAddresses wants %ld bytes.\n", asize);
+            free(adapters);
+        }
+        else if (r == ERROR_SUCCESS)
+        {
+            break;
+        }
+        else
+        {
+            fprintf(stderr, "Error from GetAdaptersAddresses: %d\n", r);
+            free(adapters);
+            WSACleanup();
+            return -1;
+        }
+
+    } while (!adapters);
+    
+
+
+//Linux
+
+    #else
     struct ifaddrs* addresses;
     
     if(getifaddrs(&addresses) == -1)
@@ -57,5 +110,5 @@ int main()
     freeifaddrs(addresses);
     return 0;
 
-    // #endif
+    #endif
 }
