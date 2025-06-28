@@ -1,5 +1,7 @@
 {
     "files.associations": {
-        "socket.h": "c"
+        "socket.h": "c",
+        "inet.h": "c",
+        "ifaddrs.h": "c"
     }
 }

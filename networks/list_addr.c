@@ -11,15 +11,9 @@
 // #else//Linux
 #define _GNU_SOURCE
 
-#include<sys/types.h>
 #include<sys/socket.h>
 #include<netdb.h>
 #include<ifaddrs.h>
-#include<fcntl.h>
-#include<net/if.h>
-#include<netinet/in.h>
-#include<string.h>
-#include<arpa/inet.h>
 // #endif
 
 #include<stdio.h>
@@ -47,18 +41,17 @@ int main()
         if(family == AF_INET || family == AF_INET6)
         {
             printf("%s\t", address->ifa_name);
-            printf("%s\n", family == AF_INET ? "IPv4" : "IPv6");
+            printf("%s\t", family == AF_INET ? "IPv4" : "IPv6");
         
 
-        char ap[100];
-        const int family_size = family == AF_INET ? \
-            sizeof(struct sockaddr_in) : sizeof(struct sockaddr_in6);
+            char ap[100];
+            const int family_size = family == AF_INET ? sizeof(struct sockaddr_in) : sizeof(struct sockaddr_in6);
         
-        getnameinfo(address->ifa_addr, family_size ,ap, sizeof(ap), 0, 0, NI_NUMERICHOST);
+            getnameinfo(address->ifa_addr, family_size, ap, sizeof(ap), 0, 0, NI_NUMERICHOST);
         printf("\t%s\n", ap);
         }
         
-    address->ifa_next;
+        address = address->ifa_next;
     }
 
     freeifaddrs(addresses);
