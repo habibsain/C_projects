@@ -39,6 +39,16 @@
 
 #endif
 
+SOCKET create_socket(struct addrinfo* address_ptr)
+{
+    printf("Creating Socket----\n");
+    
+    SOCKET new_socket;
+    new_socket = socket(address_ptr->ai_family, address_ptr->ai_socktype, address_ptr->ai_protocol);
+
+    return new_socket;
+}
+
 int main()
 {
     #if defined(_WIN32)//windows
@@ -58,10 +68,17 @@ int main()
     // printf("Current time: %s\n", ctime(&timer));
 
 //networked
-    struct addrinfo hints = {
-    
-    };
+    struct addrinfo hints;
+    memset(&hints,  0, sizeof(hints));
+    hints.ai_family = AF_INET;
+    hints.ai_socktype = SOCK_STREAM;
+    hints.ai_flags = AI_PASSIVE;
 
+    struct addrinfo* bind_addr;
+
+    getaddrinfo(0,"8080", &hints, &bind_addr);
+
+    SOCKET socket_listen = create_socket(bind_addr);
 
     return 0;
 }
