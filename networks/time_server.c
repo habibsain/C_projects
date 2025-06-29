@@ -117,6 +117,7 @@ int main()
     struct sockaddr_storage client_addr;
     socklen_t client_len = sizeof(client_addr);
     
+    //Typecast from sockaddr_storage pointer into sockaddr pointer
     SOCKET socket_client = accept(socket_listen, (struct sockaddr*) &client_addr, &client_len);
 
     if(!ISVALIDSOCKET(socket_client))
@@ -124,14 +125,29 @@ int main()
         fprintf(stderr, "accept() failed. (%d)\n", GETSOCKETERRORNO());
         return 1;
     }
+    
 
     //print client's address
     printf("Client is connected-----\n");
     
     char address_buffer[100];
-    getnameinfo((struct sockaddr*) &socket_client, client_len, address_buffer, sizeof(address_buffer), 0, 0, NI_NUMERICHOST);
+    getnameinfo((struct sockaddr*) &client_addr, client_len, address_buffer, sizeof(address_buffer), 0, 0, NI_NUMERICHOST);
 
     printf("%s\n", address_buffer);
+    
+    //Read request from client
+    printf("Reading request-----\n");
+
+    char request[1024];
+    int bytes_received = recv(socket_client, request, sizeof(request), 0);
+
+    if(bytes_received <= 0)
+    {
+        fprintf(stderr, "recv() failed. (%d)\n", GETSOCKETERRORNO());
+        return 1;
+    }
+
+    printf("Received %d bytes. \n", bytes_received);
 
     return 0;
 }
