@@ -84,9 +84,18 @@ int main()
 
             char ap[100];
 
-            getnameinfo(address->Address.lpSockaddr, )
+            getnameinfo(address->Address.lpSockaddr, address->Address.iSockaddrLength, ap sizeof(ap), 0, 0, NI_NUMERICHOST);
+            printf("\t%s\n", ap);
+
+            address = address->Next;
         }
+
+        adapter = adapter->Next;
     }
+
+    free(adapters);
+    WSACleanup();
+    return 0;
     
 
 
