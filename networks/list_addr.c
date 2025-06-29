@@ -71,6 +71,22 @@ int main()
         }
 
     } while (!adapters);
+
+    //Traverse the nodes
+    PIP_ADAPTER_ADDRESSES adapter = adapters;
+    while(adapter)
+    {
+        printf("\nAdapter name: %s\n", adapter->FriendlyName);
+        PIP_ADAPTER_UNICAST_ADDRESS address = adapter->FirstUnicastAddress;
+        while(address)
+        {
+            printf("\t%s",, address->Address.lpSockaddr->sa_family == AF_INET ? "IPv4" : "IPv6");
+
+            char ap[100];
+
+            getnameinfo(address->Address.lpSockaddr, )
+        }
+    }
     
 
 
