@@ -42,9 +42,15 @@
 SOCKET create_socket(struct addrinfo* address_ptr)
 {
     printf("Creating Socket----\n");
-    
+
     SOCKET new_socket;
     new_socket = socket(address_ptr->ai_family, address_ptr->ai_socktype, address_ptr->ai_protocol);
+
+    if(!ISVALIDSOCKET(new_socket))
+    {
+        fprintf(stderr, "Socket() failed. (%d)\n", GETSOCKETERRORNO());
+        return 1;
+    }
 
     return new_socket;
 }
@@ -78,7 +84,31 @@ int main()
 
     getaddrinfo(0,"8080", &hints, &bind_addr);
 
+    //Create Socket
     SOCKET socket_listen = create_socket(bind_addr);
+
+    //Bind the socket to local network address
+    printf("Binding socket to local address----\n");
+
+    if(bind(socket_listen, bind_addr->ai_addr, bind_addr->ai_addrlen))
+    {
+        fprintf(stderr, "bind() failed. (%d)\n", GETSOCKETERRORNO());
+        return 1;
+    }
+
+    freeaddrinfo(bind_addr);
+
+    //Listen for connections
+    printf("Listening-----\n");
+
+    //max number of connections allowed to be queued
+    int max_num = 10;
+
+    if(listen(socket_listen, max_num) < 0)
+    {
+        fprintf(stderr, "listen() failed. (%d)\n", GETSOCKETERRORNO());
+        return 1;
+    }
 
     return 0;
 }
