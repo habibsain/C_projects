@@ -46,12 +46,6 @@ SOCKET create_socket(struct addrinfo* address_ptr)
     SOCKET new_socket;
     new_socket = socket(address_ptr->ai_family, address_ptr->ai_socktype, address_ptr->ai_protocol);
 
-    if(!ISVALIDSOCKET(new_socket))
-    {
-        fprintf(stderr, "Socket() failed. (%d)\n", GETSOCKETERRORNO());
-        return 1;
-    }
-
     return new_socket;
 }
 
@@ -87,6 +81,12 @@ int main()
 
     //Create Socket
     SOCKET socket_listen = create_socket(bind_addr);
+
+    if(!ISVALIDSOCKET(socket_listen))
+    {
+        fprintf(stderr, "Socket() failed. (%d)\n", GETSOCKETERRORNO());
+        return 1;
+    }
 
     //Bind the socket to local network address
     printf("Binding socket to local address----\n");
@@ -125,7 +125,6 @@ int main()
         fprintf(stderr, "accept() failed. (%d)\n", GETSOCKETERRORNO());
         return 1;
     }
-    
 
     //print client's address
     printf("Client is connected-----\n");
@@ -148,6 +147,48 @@ int main()
     }
 
     printf("Received %d bytes. \n", bytes_received);
+
+    //print the request received
+    //Note:The request buffer is not guaranteed to be NULL terminated,
+            //so we have to properly specify the string length we want to print
+
+    printf("%.*s", bytes_received, request);
+
+    //Send response to the client
+    //First: HTTP response header
+    printf("Sending response-----\n");
+
+    const char* response = "HTTTP/1.1 200 OK\r\n"
+                           "Connection: close\r\n"
+                           "Content-Type: text/plain\r\n\r\n"
+                           "Local time  is: ";
+
+    int bytes_sent = send(socket_client,  response, strlen(response), 0);
+    printf("Sent %d of %d bytes.\n", bytes_sent, (int)strlen(response));
+
+    //Next: Actual response
+
+    time_t timer;
+    time(&timer);
+    char *time_msg = ctime(&timer);
+    bytes_sent = send(socket_client, time_msg, strlen(time_msg), 0);
+    printf("Sent %d of %d bytes.\n", bytes_sent, (int)strlen(time_msg));
+
+
+    //Close the client connection
+    printf("Closing the connection----\n");
+    CLOSESOCKET(socket_client);
+
+    //Close  thelistening socket
+    printf("Close the listening socket-----\n");
+    CLOSESOCKET(socket_listen);
+
+    //Windows
+    #if defined(_WIN32)
+        WSACleanup();
+    #endif
+
+    printf("Finished.\n");
 
     return 0;
 }
