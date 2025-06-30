@@ -39,6 +39,10 @@
 
 #endif
 
+#if !defined(IPV6_V6ONLY)
+#define IPV6_V6ONLY 27
+#endif
+
 SOCKET create_socket(struct addrinfo* address_ptr)
 {
     printf("Creating Socket----\n");
@@ -71,7 +75,7 @@ int main()
 //networked
     struct addrinfo hints;
     memset(&hints,  0, sizeof(hints));
-    hints.ai_family = AF_INET;
+    hints.ai_family = AF_INET6;
     hints.ai_socktype = SOCK_STREAM;
     hints.ai_flags = AI_PASSIVE;
 
@@ -86,6 +90,14 @@ int main()
     {
         fprintf(stderr, "Socket() failed. (%d)\n", GETSOCKETERRORNO());
         return 1;
+    }
+
+    //Make it support dual-stack sockets
+    int  option = 0;
+    if(setsockopt(socket_listen, IPPROTO_IPV6, IPV6_V6ONLY, (void*)&option, sizeof(option)))
+    {
+        fprintf(stderr, "setsockopt() failed. (%d)\n", GETSOCKETERRORNO());
+        return  1;
     }
 
     //Bind the socket to local network address
