@@ -145,7 +145,7 @@ int main()
 
         //Close  thelistening socket
         printf("Close the listening socket-----\n");
-        CLOSESOCKET(socket_listen);
+        CLOSESOCKET(socket_client);
     }
 
     //Windows
