@@ -148,7 +148,7 @@ int main()
     
     //Read request from client
     printf("Reading request-----\n");
-
+    sleep(3);
     char request[1024];
     int bytes_received = recv(socket_client, request, sizeof(request), 0);
 
@@ -169,7 +169,7 @@ int main()
     //Send response to the client
     //First: HTTP response header
     printf("Sending response-----\n");
-    sleep(3);
+    
 
     const char* response = "HTTTP/1.1 200 OK\r\n"
                            "Connection: close\r\n"
