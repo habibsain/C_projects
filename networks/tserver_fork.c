@@ -142,11 +142,21 @@ int main()
             CLOSESOCKET(socket_client);
             exit(0);
         }
-        //parent process
+        else if(pid < 0)
+        {
+            fprintf(stderr, "fork() failed. (%d)\n", GETSOCKETERRORNO());
+            exit(1);
+        }
+        else
+        {
+            //parent process
+            waitpid(pid, NULL);
 
-        //Close  thelistening socket
-        printf("Close the listening socket-----\n");
-        CLOSESOCKET(socket_client);
+            //Close  thelistening socket
+            printf("Close the listening socket-----\n");
+            CLOSESOCKET(socket_client);
+        }
+        
     }
 
     //Windows
