@@ -9,10 +9,13 @@ int main()
 
 	darray* new_arr;
 	
+	//We have initialised an array of size 5
+	//But the darray dynamically changes size to append data as per requirent
 	new_arr = init_darray(5);
 
 	for(int i = 0; i < 6; i++)
 	{
+		//We are appending arr[6] elements into new_arr[5] 
 		append_darray(new_arr, arr[i]);
 		int val = new_arr->data [i];
 		printf("The element darr[%d] is: %d\n", i, val);
