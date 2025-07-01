@@ -1,4 +1,0 @@
--rw-rw-r--  1 ashraful ashraful   900 May 15 23:17 func_pointers2.c
--rw-rw-r--  1 ashraful ashraful   620 May 15 22:19 func_pointers.c
--rw-rw-r--  1 ashraful ashraful   684 May 14 13:15 pointers2.c
--rw-rw-r--  1 ashraful ashraful   630 May 14 13:14 pointers.c
