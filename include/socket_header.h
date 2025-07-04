@@ -43,6 +43,12 @@
 #define IPV6_V6ONLY 27
 #endif
 
+typedef struct Timeval
+{
+    long tv_sec;
+    long tv_usec;
+} timeval;
+
 SOCKET create_socket(struct addrinfo* address_ptr)
 {
     printf("Creating Socket----\n");
