@@ -57,7 +57,7 @@ SOCKET create_socket(struct addrinfo* address_ptr)
 int main()
 {
     #if defined(_WIN32)//windows
-    WSDATA d;
+    WSDAATA d;
 
     if(WSAStartup(MAKEWORD(2, 2),  &d))
     {
