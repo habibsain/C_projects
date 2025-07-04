@@ -6,7 +6,7 @@ int main()
 {
     //Initialise winsock for Windows
     #if defined(_WIN32)
-    WSDATA d;
+    WSADATA d;
 
     if(WSAStartup(MAKEWORD(2, 2),  &d))
     {
