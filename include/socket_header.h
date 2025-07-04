@@ -43,7 +43,7 @@
 #define IPV6_V6ONLY 27
 #endif
 
-typedef struct Timeval
+typedef struct Timeval  
 {
     long tv_sec;
     long tv_usec;
