@@ -1,6 +1,9 @@
 //Multiprocess implementation of multiplex TCP
 
 #include "../include/socket_header.h"
+#include <sys/types.h>
+#include <sys/wait.h>
+
 
 int main()
 {
