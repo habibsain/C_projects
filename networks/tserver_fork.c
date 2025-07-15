@@ -153,7 +153,7 @@ int main()
         else
         {
             //parent process
-            waitpid(pid, NULL);
+            waitpid(pid, NULL, 0);
 
             //Close  thelistening socket
             printf("Close the listening socket-----\n");
