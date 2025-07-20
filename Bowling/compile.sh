@@ -2,6 +2,7 @@
 
 if [[ $# -eq 0 ]]; then
     echo usage: ./compille file.c
+    exit 1
 
 elif [[ $# -eq 1 ]]; then
     target=$1
