@@ -2,3 +2,5 @@ test.c
 
 *.x
 *.txt
+
+*.vscode/

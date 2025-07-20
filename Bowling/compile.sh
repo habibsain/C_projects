@@ -1,21 +1,26 @@
 #! /bin/bash
 
+gccflag=-I../include/
+src=../src/mem.c
+target=$1
+out=${target/.c/.x}
+
 if [[ $# -eq 0 ]]; then
-    echo usage: ./compille file.c
-    exit 1
-
-elif [[ $# -eq 1 ]]; then
-    target=$1
-
-# elif [[ $# -eq 2 ]]; then
-#     target=$1
-#     arg=$2
+    echo "usage: ./compille file.c flag(none = Includes mem.h; 1 = without mem.h)"
+    exit 1   
 fi
 
+#flag:
+#no flag
+
 #simple compiler script to ease the process
-if [[ $target =~ \.c$ ]]; then
-    out=${target/.c/.x}
-    gcc $target -o $out
+if [[ $target =~ \.c$ && $# -eq 1 ]]; then
+    
+    gcc $gccflag $src $target -o $out
+
+elif [[ $target =~ \.c$ && $2 -eq 1 ]]; then
+    gcc  $target -o $out
+
 else
-    echo usage: ./compille file.c
+    echo "usage: ./compille file.c flag(none = Includes mem.h; 1 = without mem.h)"
 fi
