@@ -34,6 +34,7 @@ static void test_gutter_game()
 //Test the scenario where 1 ball falls at every try
 static void test_all_ones()
 {
+    bowling_game_init();
     //Total 20 tries with one falling pin everytime
     roll_many(20, 1);
 
