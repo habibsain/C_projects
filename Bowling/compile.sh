@@ -1,7 +1,8 @@
 #! /bin/bash
 
 gccflag="-I../include/ -Wall"
-src=../src/mem.c
+#src=../src/mem.c
+src=bowling_game.c
 target=$1
 out=${target/.c/.x}
 
@@ -20,6 +21,9 @@ if [[ $target =~ \.c$ && $# -eq 1 ]]; then
 
 elif [[ $target =~ \.c$ && $2 -eq 1 ]]; then
     gcc  $target -o $out
+
+elif [[ $target == clean ]]; then
+    rm *.x
 
 else
     echo "usage: ./compille file.c flag(none = Includes mem.h; 1 = without mem.h)"

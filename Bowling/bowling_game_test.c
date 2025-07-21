@@ -5,6 +5,9 @@
 #include <assert.h>
 #include <stdbool.h>
 
+
+//Test the scenario where every try is a gutter ball
+//Gutter ball: Ball that doesn't hit any pins
 static void test_gutter_game()
 {
     //start the game
@@ -16,11 +19,12 @@ static void test_gutter_game()
     {
         bowling_game_roll(0);
     }
+    //
     assert(bowling_game_score() == 0 && "test_gutter_game()");
 }
 
 int main() 
 {
-    assert( false && "My first unit test");
+    test_gutter_game();
     return 0;
 }
