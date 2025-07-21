@@ -24,19 +24,20 @@ void bowling_game_roll(int pins)
 int bowling_game_score()
 {
 	int score = 0;
+	int i = 0;
 	
 	//sum over all
-	for (int i = 0; i < MAX_ROLLS; i++)
+	for (int frame = 0; frame < 10; frame++)
 	{
-		score += rolls[i];
-		//check for spare
-		if (i%2 == 0 && (rolls[i] + rolls[i+1]) == 10 )
+		int frame_total = rolls[i] + rolls[i+1];
+		score += frame_total;
+
+		if (frame_total == 10 && (i + 2) < 20)
 		{
-			if (i + 2 < MAX_ROLLS)
-			{
-				score += rolls[i+2];
-			}
+			score += rolls[i + 2];
 		}
+		i += 2;
+		
 	}
 
 	return score;
