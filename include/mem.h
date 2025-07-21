@@ -8,7 +8,7 @@
 
 void* NEW(size_t size);
 
-void* FREE(void* ptr);
+void FREE(void* ptr);
 
 
 

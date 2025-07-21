@@ -1,6 +1,6 @@
 #! /bin/bash
 
-gccflag=-I../include/
+gccflag="-I../include/ -Wall"
 src=../src/mem.c
 target=$1
 out=${target/.c/.x}
