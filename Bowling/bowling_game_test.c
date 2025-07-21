@@ -13,18 +13,31 @@ static void test_gutter_game()
     //start the game
     bowling_game_init();
 
-    //loop over all 20 tries that forms 10 frames
-    //roll the ball in each try
+    //Total 20 tries over 10 frames
     for (int i = 0; i < 20; i++)
     {
+        //zero ball fell on the roll
         bowling_game_roll(0);
     }
-    //
+    //test name string for ease in debugging
     assert(bowling_game_score() == 0 && "test_gutter_game()");
+}
+
+//Test the scenario where 1 ball falls at every try
+static void test_all_ones()
+{
+    bowling_game_init();
+    for (int i = 0; i < 20; i++)
+    {
+        bowling_game_roll(1);
+    }
+
+    assert(bowling_game_score() == 20 && "test_all_ones()");
 }
 
 int main() 
 {
     test_gutter_game();
+    test_all_ones();
     return 0;
 }
