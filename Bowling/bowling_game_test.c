@@ -40,9 +40,25 @@ static void test_all_ones()
     assert(bowling_game_score() == 20 && "test_all_ones()");
 }
 
+static void test_one_spare()
+{
+    bowling_game_init();
+    bowling_game_roll(5);
+    bowling_game_roll(5);
+    //spare: 10 fell in 1st frame
+    bowling_game_roll(3);
+    roll_many(17,  0);
+
+    //first frame score = 13
+    //2nd frame score = 13 + 3
+    //Total score = 16
+    assert(bowling_game_score() == 16 && "test_one_spare()");
+}
+
 int main() 
 {
     test_gutter_game();
     test_all_ones();
+    test_one_spare();
     return 0;
 }
